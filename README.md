@@ -6,6 +6,7 @@ This code is associated with the paper : “VIPR: Vectorial Implementation of Ph
 
 The code generates a phase mask from a set of images with pre-defined coordinates ( for a z-stack or any general design), optimized mainly for high NA objectives. 
 
+
 # Note on future updates 
 
 This demo is a current working version with 2 examples; in the near future a MATLAB GUI will be added for easier use, 
@@ -99,6 +100,8 @@ and later a JAVA GUI will be added.
       We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any         other way. 
 
       for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
+        
+      ![](gifs/DH_PSF.gif)
 
 * Part E: optional coordinate entry.
 
