@@ -19,19 +19,12 @@ z_stack_pos = (z_stack_pos-z_stack_pos(1)+ 3);
 
 
 %% select ROI
-h = figure;
-imagesc(IMG(:,:,round(end/2)));daspect([1,1,1]);
-FOV_size = IS.FOV_size;
-h_rect = imrect(gca, [1 1 FOV_size FOV_size]); % create rectangle on the image
-setResizable(h_rect,false);
-message = sprintf('Drag and double click on the rectangle box to choose ROI');
-uiwait(msgbox(message));
-R = round(wait(h_rect)); % get position
-W = max(R(3),R(4));
-
+IS.FOV_size = 80;
+%pre - defined coordinates 
+R = [37 36 80 80];
+W = 80;
+% cut FOV 
 IMG_T = IMG(round(R(2)):round(R(2))+W,round(R(1)):round(R(1))+W,:);
-FOV_size = size(IMG_T,1);
 
-close(h)
 
 

@@ -10,7 +10,8 @@
 %
 clear all;close all;clc
 % add bfmatlab (bio-formats) to read the demo images from https://downloads.openmicroscopy.org/bio-formats/5.3.4/
-
+%% data set
+data_set = 2; %1-EPFL DH 1.5[um], 2 - 4[um] Tetrapod measured with 0.04[um] beads at wavelength 605[nm]
 %% all user input defined here
 VIPR_user_input;
 
@@ -36,7 +37,7 @@ else
     std_stack = zeros(1,size(q_cord,1));
     mean_stack = zeros(1,size(q_cord,1));
 end
-%% thr and reduce background from the images
+%% thr and reduce offset from the images
 IMG_T = IMG_bu;
 %
 for j = 1:size(IMG_T,3)

@@ -108,31 +108,22 @@ for z_ind = 1:size(q,1)
     
     %% shift and blur the PSF
     tmp  = (fftshift(real(Iimg)));
-    tmp = imfilter(tmp,gBlur,'replicate'); 
+    tmp = imfilter(tmp,gBlur,'replicate');
     %%
     if Nph_opt_flag
-        %
-%         % correct via max
-%         sort_B = sort(data_z0(:));
-%         sort_A = sort(tmp(:));
-%         Nph_max_fact(z_ind) = mean((sort_B(end-6:end))./sort_A(end-6:end));
-        % correct via max
-        thr_Max = 0.33;
-        mask = tmp>thr_Max.*max(tmp(:));
-% %         
-        sort_B = data_z0.*mask;
-        sort_A = tmp.*mask;
-%         %
-        Nph_max_fact(z_ind) = mean(sort_B(sort_B>0))./mean(sort_A(sort_A>0));
+        sort_dat = sort(data_z0(:));
+        sort_tmp = sort(tmp(:));
+        Nph_max_fact(z_ind) = mean((sort_dat(end-20:end))./sort_tmp(end-20:end));
         
-        % limit to a reasonable 0.8 to 1.2
-        if Nph_max_fact(z_ind) < 0.8
-            Nph_max_fact(z_ind) = 0.8;
-        elseif Nph_max_fact(z_ind) > 1.2
-            Nph_max_fact(z_ind) = 1.2;
-        elseif abs(Nph_max_fact(z_ind)-1)<0.02
-            Nph_max_fact(z_ind)=1;
+        % limit to a reasonable 0.85 to 1.15
+        if Nph_max_fact(z_ind) < 0.85
+            Nph_max_fact(z_ind) = 0.85;
+        elseif Nph_max_fact(z_ind) > 1.15
+            Nph_max_fact(z_ind) = 1.15;
         end
+        
+        % moving average
+        Nph_max_fact(z_ind) = (Nph_max_fact(z_ind)+1)/2;
         %
         tmp = tmp.*Nph_max_fact(z_ind);
     end

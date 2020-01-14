@@ -58,7 +58,6 @@ if gpu_flag==1
     gBlur_gpu = gpuArray(gBlur_gpu);
 end
 
-noise_flag = 1;
 sample_flag = 1;
 %% do init if no init mask was given
 if sum(x(:)) == 0
@@ -69,16 +68,14 @@ end
 %% run iterations
 while iter<=maxiter
     %   randominze noise and blur
-    if noise_flag
-        % randomize the noise in the slice
-        if noisy_flag
-            std_stack = max(std_stack0 + normrnd(0,mean(std_stack0)/8,1),mean(std_stack0)/2);
-            % randomize Blur kernel
-            gB = min(max(normrnd(gB_est,gB_est/8),1/2*gB_est),1.5);
-            gBlur_gpu = ( fspecial('gaussian',[5 5],gB));
-            if gpu_flag==1
-                gBlur_gpu = gpuArray(gBlur_gpu);
-            end
+    % randomize the noise in the slice
+    if noisy_flag
+        std_stack = max(std_stack0 + normrnd(0,mean(std_stack0)/8,1),mean(std_stack0)/2);
+        % randomize Blur kernel
+        gB = min(max(normrnd(gB_est,gB_est/8),1/2*gB_est),1.5);
+        gBlur_gpu = ( fspecial('gaussian',[5 5],gB));
+        if gpu_flag==1
+            gBlur_gpu = gpuArray(gBlur_gpu);
         end
     end
     
@@ -169,9 +166,8 @@ while iter<=maxiter
     Nph_pool = Nph(ind_opt);
     %% comp grad
     % grad
-    if opt_flag == 4
-        [out,grad,Nph_max_fact] = fun(x,q_pool,data_pool,std_pool,Nph_pool,gBlur_gpu,Nph_opt_flag);
-    end
+    [out,grad,Nph_max_fact] = fun(x,q_pool,data_pool,std_pool,Nph_pool,gBlur_gpu,Nph_opt_flag);
+    
     % correct intensity estimate 
     Nph(ind_opt) = Nph(ind_opt).*Nph_max_fact';
     % update cost
@@ -296,12 +292,13 @@ while iter<=maxiter
             model_stack(:,:,j) = gather(Nph(j)*(GenFunc(x,q(j,:))));
             tmp = data(:,:,j);
             data_stack(:,:,j) = gather((tmp).*(tmp~=0));
+            thr_dat(j) = gather(max(tmp(:)).*0.3);% create thr vec
         end
         
         %% estimate gBlur
         options = optimoptions(@fmincon,'Display','iter','gradObj','off','algorithm','sqp');
         
-        cost = @(gB) CostgBlur(gB,data_stack,model_stack,IS.gBlur_cost,gather(std_stack0),gather(std_stack0));
+        cost = @(gB) CostgBlur(gB,data_stack,model_stack,IS.gBlur_cost,gather(std_stack0),(thr_dat));
         gB_est = fmincon(cost,IS.gBlur,[],[],[],[],0.3,10,[],options);
         % create new blur kernel
         gBlur_gpu = ( fspecial('gaussian',[5 5],gB_est));
@@ -324,7 +321,7 @@ while iter<=maxiter
     if sample_flag == 1 && iter == IS.SGDiter
         %         f1 = 0;
         %         f2 = 0;
-        noise_flag = 0;
+        noisy_flag = 0;
         sample_flag = IS.last_iter_flag;
         %create constant blur and noise for the rest of iterations 
         gB = gB_est;

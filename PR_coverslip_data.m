@@ -137,7 +137,8 @@ if plot_flag==1
         daspect([1 1 1]);
         title(['data NFP=',num2str(q(z,4))]);
         drawnow
-        pause(0.5)
+        pause(0.1)
     end
+    close(100)
 end
 end
