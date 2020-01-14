@@ -97,6 +97,8 @@ and later a JAVA GUI will be added.
 
       Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
 
+      ![](gifs/TP_PSF.gif)
+
       We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any         other way. 
 
       for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
