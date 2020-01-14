@@ -1,32 +1,38 @@
 # PR-PixelWise
 
-Overview: 
+# Overview: 
 
 This code is associated with the paper : “VIPR: Vectorial Implementation of Phase Retrieval for fast and accurate microscopic pixel-wise pupil estimation 2020”.
 
 The code generates a phase mask from a set of images with pre-defined coordinates ( for a z-stack or any general design), optimized mainly for high NA objectives. 
 
-Other software use:
-•	The demo code uses bio-formats (bfmatlab) to load the demo images (The user needs to download it and add it to the path). 
+# Note on future updates 
 
-•	Finobj.mat written by Yair M. Altman , used to handles the plots better. 
+This demo is a current working version with 2 examples; in the near future a MATLAB GUI will be added for easier use, 
+and later a JAVA GUI will be added. 
 
-Software use guide:
+# Other software use:
 
-General guidelines: 
+•	The demo code uses bio-formats (bfmatlab) to load the demo images (the user needs to download it and add it to the path). 
 
-•	the code is designed around doing most of the optical computations once.
+•	Finobj.mat written by Yair M. Altman , used to handles the plots. 
+
+# General guidelines: 
+
+•	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
 
-Work flow:
+# Work flow:
 
 1)	Open ''Main''
 
-2)	Access the script ''VIPR_user_input'':
-This script contains all the required user data which is needed for Main.mat to run.
+2) Choose data set ( data_set = 1 for EPFL DH data and data_set = 2 for TP).
 
-Part A: this part contains the flags which control the MATLAB code outline:
+3)	Access the script ''VIPR_user_input'':
+This script contains all the required user data which is needed for ''Main.mat'' to run.
+
+* Part A: this part contains the flags which control the MATLAB code outline:
 
 a)	Prior_mask_flag :(default 0) - 1 if you want to start from a pre-defined mask and not from a clear aperture. 
 
@@ -46,23 +52,13 @@ g)	vec_model_pol : needed If vec_model_flag=1, choose polarization state ‘x’
 
 h)	noisy_flag: 0- for design PSFs, 1 - for real measurements(default).
 
-Part B: define the optical system and measured PSFs. 
+* Part B: define the optical system and measured PSFs. 
 
-a)	open ''init_input.mat'' and change the optical parameters to match your setup. 
+Open ''init_input.mat'' and change the optical parameters to match your setup. 
 
 Notes: for freely rotating dipole, leave polarization vector as zeros. 
 
-b)	demo - The function load_data_stack.mat loads the z-stack measurements and associated NFP positions which were written in the metadata. 
-
-For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-stack(recommended to use an odd grid size ) 
-
-and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
-
-Default: the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
-
-We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any other way. 
-
-Part C: more advanced optimization parameters. 
+* Part C: more advanced optimization parameters. 
 
 a)	IS.I_thr_flag : how to  threshold the data - 1 is for thresholding pixels below IS.thr*max(I) per image I, 2 - threshold pixels below IS.thr*background_std.
 
@@ -92,20 +88,32 @@ m)	IS.update_Signal : 1 - update signal at second half of iterations (needs more
 
 n)	IS.plotsize : size of psf plots [pixels]
 
-Part D: optional coordinate entry.
+* Part D: load the data set
+
+• For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-stack(recommended to use an odd grid size ) 
+
+and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
+
+Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
+
+We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any other way. 
+
+for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
+
+* Part E: optional coordinate entry.
 
 Default: only a z-stack was measured. But the code can handle any input of x,y,z,NFP coordinates.
 
 
-Output (of the spcript ''Main'')
+# Output (of the script ''Main'')
 
-Plots: if plot_flag = 1
+Plots (if plot_flag = 1)
 
 a)	A phase mask plot will be seen (with modulus of 2*pi), plotted every 30 iterations
 
 b)	Sample PSFs are plotted with the matching model, plotted every 30 iterations
 
-c)	The Cost function output, plotted every 30 iterations
+c)	The cost function value, plotted every 30 iterations
 
 d)	Correlation between the model and the measured stack, plotted at the end
 
@@ -116,11 +124,35 @@ Variables output:
 
 a)	maskRec – the phase retrieved mask, unwrapped. 
 
-b)	gB – gaussian blur kernel estimation [pixels]
+b)	gB – std of thegaussian blur kernel estimation [pixels]
 
 c)	Nph – vector of estimated image intensities 
 
 d)	I_mod – the reconstructed z-stack.
+
+# Use after retrieval
+
+The function PSF_generator can be used estimate the recovery by creating an in-line function at the end of the script:
+
+PSF_Gen = @(phase_mask,x,y,z,NFP) PSF_generator(phase_mask,[x,y,z],IS,NFP,opt_phase_mat...
+    ,g_bfp,circ,circ_sc,int_cos,vec_model_flag);
+ 
+# Citation
+
+If you use this code for your research, please cite our paper:
+```
+@article{ferdman2020vipr,
+  title={VIPR: Vectorial Implementation of Phase Retrieval for fast and accurate microscopic pixel-wise pupil estimation},
+  author={Ferdman, Boris and Nehme, Elias and Weiss, Lucien E and Orange, Reut and Alalouf, Onit and Shechtman, Yoav},
+  journal={bioRxiv},
+  year={2020},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
+
+# Contact
+
+To report any bugs, suggest improvements, or ask questions, please contact me at "borisferd@gmail.com"
  
 
 
