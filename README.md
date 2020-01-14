@@ -42,8 +42,7 @@ and later a JAVA GUI will be added.
     c)	vec_model_flag : 1(default) for vectorial model, 0 for scalar ( faster, use for air-objectives).
 
     d)	cost_function_flag : define cost function to optimize, 1-L1, 2-L2, 3- Poisson MLE, 4- Gaussian MLE (default-see paper) 
-
-        if you want to add a new cost, consult with the author, it is quite easy to do. 
+        if you want to add a new cost, consult with the author, it is quite easy to do.
 
     e)	plot_flag: 1 to visualize results during optimization(default), slows down the code.
     
@@ -91,19 +90,19 @@ and later a JAVA GUI will be added.
 
 * Part D: load the data set
 
-    • For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-                   stack(recommended to use an odd grid size ) 
+   • For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-                   stack(recommended to use an odd grid size ) 
 
-      and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
+     and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
 
-      Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
+     Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
 
-      ![](gifs/TP_PSF.gif)
+     ![](gifs/TP_PSF.gif)
 
-      We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any         other way. 
+     We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any         other way. 
 
-      for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
+     for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
         
-      ![](gifs/DH_PSF.gif)
+     ![](gifs/DH_PSF.gif)
 
 * Part E: optional coordinate entry.
 
