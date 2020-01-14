@@ -5,7 +5,7 @@ vec_model_flag = 1; % 1 - vectorial model, 0 - scalar model
 cost_function_flag = 4; % optimization cost 1 - L1, 2 - L2, 3 - Poiss MLE, 4 - Sum of gaussians MLE
 plot_flag = 1; % plot while SGD runs, slows down ~ X4
 Alg_flag = 1  ; % gradient method : 1 - ADAM, 2 - Adamax , 3- Nadam, 4 - Nesterov ,5- Vanilla SGD
-vec_model_pol = 'x' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
+vec_model_pol = 'y' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
 noisy_flag = 1; % 0- for design PSFs, 1 - for PR;
 
 %% load data stack and z positions and define optical parameters
