@@ -9,8 +9,7 @@ The code generates a phase mask from a set of images with pre-defined coordinate
 
 # Note on future updates 
 
-This demo is a current working version with 2 examples; in the near future a MATLAB GUI will be added for easier use, 
-and later a JAVA GUI will be added. 
+This demo is a current working version with 2 examples; in the near future a GUI will be added for easier use.
 
 # Other software use:
 
