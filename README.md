@@ -9,7 +9,7 @@ The code generates a phase mask from a set of images with pre-defined coordinate
 
 # Note on future updates 
 
-This demo is a current working version with 2 examples; in the near future a GUI will be added for easier use.
+This demo is a currently working with 2 examples and and option for user input data; in the near future a GUI will be added for easier use.
 
 # Other software use:
 
