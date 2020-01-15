@@ -18,15 +18,21 @@ and later a JAVA GUI will be added.
 
 # General guidelines: 
 
+•       As this code is aimed at being general, we cannot define metrics for centering\cropping in advance.
+        Thus: you need to create a centered z-stack - has to be square and we recommend an odd grid size.
+        
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
 
+
 # Work flow:
 
-1)	Open ''Main''
+0) Download all the files and extract the rar files from "demo_data" into the folder (leave the extracted as seperate folders)
 
-2) Choose data set ( data_set=1 for your data, data_set = 3 for EPFL DH data and data_set = 2 for TP).
+1) Open ''Main''
+
+2) Choose data set ( data_set=1 for your data, data_set = 3 for EPFL Double Helix data and data_set = 2 for demo TetraPod stack).
 
 Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
 
@@ -97,7 +103,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     m)	IS.plotsize : size of psf plots [pixels]
 
-3) if you want to use your data - open 'VIPR_load_data.mat'
+4) if you want to use your data - open 'VIPR_load_data.mat'
     a) Choose your measured z-stack
     
     * important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
@@ -105,8 +111,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
     
     b) input coordinates associated with the images in any way you want
     input size needs to match the amount of images loaded
-    Default: x=0 ; y = 0 ; z = emitter radius; NFP loaded for TP images
-
+    Default: x=0 ; y = 0 ; z = emitter radius; z_stack_pos - Nominal Focal Plane(NFP) positions (Default - loads NFP mat file for                    TetraPod images)
 
 
 # Output (of the script ''Main'')
