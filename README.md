@@ -14,8 +14,6 @@ and later a JAVA GUI will be added.
 
 # Other software use:
 
-•	The demo code uses bio-formats (bfmatlab) to load the demo images (the user needs to download it and add it to the path). 
-
 •	Finobj.mat written by Yair M. Altman , used to handles the plots. 
 
 # General guidelines: 
@@ -28,8 +26,16 @@ and later a JAVA GUI will be added.
 
 1)	Open ''Main''
 
-2) Choose data set ( data_set = 1 for EPFL DH data and data_set = 2 for TP).
+2) Choose data set ( data_set=1 for your data, data_set = 3 for EPFL DH data and data_set = 2 for TP).
 
+Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
+
+![](gifs/TP_PSF.gif)
+
+for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
+        
+![](gifs/DH_PSF.gif)
+     
 3)	Access the script ''VIPR_user_input'':
     This script contains all the required user data which is needed for ''Main.mat'' to run.
 
@@ -54,14 +60,14 @@ and later a JAVA GUI will be added.
     
     i)	est_gBlur_flag : 1(default)- estimate gBlur after 1/3 of the iterations, 0 - leave initial guess
 
-    
     Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
 
-* Part B: define the optical system and measured PSFs. 
+* Part B: define the optical system 
 
-    Open ''init_input.mat'' and change the optical parameters to match your setup. 
+    Change the parameters to match your optical system.
 
     Note: for freely rotating dipole, leave polarization vector as zeros. 
+          for fixed dipoles, input a normalized vector. 
 
 * Part C: more advanced optimization parameters. 
 
@@ -91,25 +97,16 @@ and later a JAVA GUI will be added.
 
     m)	IS.plotsize : size of psf plots [pixels]
 
-* Part D: load the data set
+3) if you want to use your data - open 'VIPR_load_data.mat'
+    a) Choose your measured z-stack
+    
+    * important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
+    Thus: you need to create a centered z-stack - has to be square and we recommend and odd grid size.
+    
+    b) input coordinates associated with the images in any way you want
+    input size needs to match the amount of images loaded
+    Default: x=0 ; y = 0 ; z = emitter radius; NFP loaded for TP images
 
-   • For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-                   stack(recommended to use an odd grid size) 
-
-     and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
-
-     Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
-
-     ![](gifs/TP_PSF.gif)
-
-     We added the z position of the images to the file metadata, to insert your data, remove this line and load the positions in any         other way. 
-
-     for data_set = 1 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
-        
-     ![](gifs/DH_PSF.gif)
-
-* Part E: optional coordinate entry.
-
-    Default: only a z-stack was measured. But the code can handle any input of x,y,z,NFP coordinates.
 
 
 # Output (of the script ''Main'')
