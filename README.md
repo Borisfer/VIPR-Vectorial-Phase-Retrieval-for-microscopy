@@ -52,6 +52,9 @@ and later a JAVA GUI will be added.
 
     h)	noisy_flag: 0- for design PSFs, 1 - for real measurements(default).
     
+    i)	est_gBlur_flag : 1(default)- estimate gBlur after 1/3 of the iterations, 0 - leave initial guess
+
+    
     Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
 
 * Part B: define the optical system and measured PSFs. 
@@ -74,21 +77,19 @@ and later a JAVA GUI will be added.
 
     f)	IS.point_num : size of mini-batch per SGD iteration (default 3)
 
-    g)	est_gBlur_flag : 1(default)- estimate gBlur after 1/3 of the iterations, 0 - leave initial guess
+    g)	IS.gBlur_cost : cost function  to estimate the gaussian blur kernel if est_gBlur_flag=1, (1-4 same as cost_function_flag , 5 -           by corr2)
 
-    h)	IS.gBlur_cost : cost function  to estimate the gaussian blur kernel if est_gBlur_flag=1, (1-4 same as cost_function_flag , 5 -           by corr2)
+    h)	IS.last_iter : how many iterations  to run not with SGD (at end of optimization), at these iterations, the noise and blur are           not randomized. 
 
-    i)	IS.last_iter : how many iterations  to run not with SGD (at end of optimization), at these iterations, the noise and blur are           not randomized. 
+    i)	IS.last_iter_flag : 1 - contuine SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with             side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information." International Conference on             Machine Learning. 2016)
 
-    j)	IS.last_iter_flag : 1 - contuine SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with             side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information." International Conference on             Machine Learning. 2016)
+    j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
 
-    k)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
+    k)	IS.upsample_fact : (default 1) if you wish to upsample the data, usufull if object space pixels are large compared to the               wavelength
 
-    l)	IS.upsample_fact : (default 1) if you wish to upsample the data, usufull if object space pixels are large compared to the               wavelength
+    l)	IS.update_Signal : 1 - update signal at second half of iterations (needs more iterations, but is more accurate - might overfit           the data), 0 - keep the image sum as initial guess
 
-    m)	IS.update_Signal : 1 - update signal at second half of iterations (needs more iterations, but is more accurate - might overfit           the data), 0 - keep the image sum as initial guess
-
-    n)	IS.plotsize : size of psf plots [pixels]
+    m)	IS.plotsize : size of psf plots [pixels]
 
 * Part D: load the data set
 
