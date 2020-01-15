@@ -53,7 +53,7 @@ for z_ind = 1:size(q,1)
         g_bfp = g_bfp_init*0;
         g_img = g_bfp_init*0;
         
-        if sum(IS.p_vec) == 0 % freely rotating - superposition solution
+        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
             
             % normalization
             %         normfact = sqrt(Nph).*normfact_gpu;
@@ -71,7 +71,7 @@ for z_ind = 1:size(q,1)
             % normalization
             for div_pol = 1:floor(size(IS.g_bfp,3)/3)
                 for g_id = 1:3
-                    g_bfp(:,:,g_id) = g_bfp_init(:,:,g_id).*exp(1i.*phase_mask) .*BFP_Phase.*circ;
+                    g_bfp(:,:,g_id) = g_bfp_init(:,:,g_id).*BFP_Phase.*circ;
                     P_mat(:,:,g_id) = g_bfp(:,:,g_id).*IS.p_vec(g_id);
                 end
                 P_fact(div_pol) = sum(sum(abs(sum(P_mat,3)).^2));
@@ -102,7 +102,7 @@ for z_ind = 1:size(q,1)
     
     %% calc gradient
     if vec_model_flag 
-        if sum(IS.p_vec) == 0 % freely rotating - superposition solution
+        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
             for g_id = 1:size(g_img,3)
                 grad_tmp(:,:,g_id) = 2*1/N*real((fft2(ifftshift(data_z0).*1i.*conj(g_img(:,:,g_id))).*g_bfp_init(:,:,g_id))); %%
             end

@@ -61,7 +61,7 @@ end
 sample_flag = 1;
 %% do init if no init mask was given
 if sum(x(:)) == 0
-    [guess1] = Cost_fun_init(x,q,data,std_stack0,Nph,gBlur_gpu);
+    [guess1] = Cost_fun_init(q,data,std_stack0,Nph,gBlur_gpu);
     x = x - step_size*guess1/10^6;
 end
 

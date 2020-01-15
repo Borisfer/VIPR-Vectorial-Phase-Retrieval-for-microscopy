@@ -32,7 +32,7 @@ if vec_model_flag == 1
     g_img = opt_phase_mat*0;
     
     % calc image pattern
-    if sum(IS.p_vec) == 0 % freely rotating - superposition solution
+    if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
         
         
         % Parseval normailization

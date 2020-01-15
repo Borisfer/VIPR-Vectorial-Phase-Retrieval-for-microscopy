@@ -9,21 +9,46 @@
 % Copyright by Boris Ferdman: borisferd@gmail.com
 %
 clear all;close all;clc
-% add bfmatlab (bio-formats) to read the demo images from https://downloads.openmicroscopy.org/bio-formats/5.3.4/
 %% data set
-data_set = 2; %1-EPFL DH 1.5[um], 2 - 4[um] Tetrapod measured with 0.04[um] beads at wavelength 605[nm]
+data_set = 1; %1 - your data, 3-EPFL DH 1.5[um], 2 - 4[um] Tetrapod mask 
 %% all user input defined here
 VIPR_user_input;
+
+%% load data
+if data_set == 1
+    VIPR_load_data;
+elseif data_set == 2
+    % load data and z positions
+    load_data_stack;
+    % z is always emitter radius
+    z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
+    % xy are 0
+    xy = zeros(length(z_stack_pos),2);
+elseif data_set == 3
+    %load data
+    EPFL_data_load;
+    % how much to sample
+    dI = 1;
+    % choose a single stack
+    IMG_T = DH_PSF(:,:,1:dI:end,5);
+    % take minus z to match to NFP
+    z_stack_pos = -z(1:dI:end,1);
+    % image centering
+    xy = xy(1:dI:end,:,1);
+    z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
+    IS.FOV_size = size(IMG_T,1);
+    % do scalar model because we don't know really what the system is
+    vec_model_flag = 0;
+end
+
+% define positions per image - [x,y,z,NFP]
+q_cord = [xy';z_pos';z_stack_pos']';
 
 %% Gaussian noise estimation per Z
 if noisy_flag
     dx=IS.corner_size;
     for j = 1:size(IMG_T,3)
         tmp = [IMG_T(1:dx,1:dx,j);IMG_T(end-dx+1:end-1+1,end-dx+1:end-1+1,j);IMG_T(end-dx+1:end-1+1,1:dx,j);IMG_T(1:dx,end-dx+1:end-1+1,j)];
-        % plot noise hist
-        ff = figure(22)
-        histfit(tmp(tmp>0),10);
-        title('noise fitting');
         %
         mean_stack(j) = mean(tmp(tmp>0));
         % Estimate the std
@@ -31,7 +56,6 @@ if noisy_flag
         
     end
     IMG_bu = IMG_T;
-    close(22)
 else
     IMG_bu = IMG_T;
     std_stack = zeros(1,size(q_cord,1));
@@ -164,11 +188,7 @@ end
 % IMG_T = tmp_stack;
 
 %% PR the mask
-if Prior_mask_flag==1
-    [maskRec,gB,Nph,I_mod] = PR_coverslip_data(IS,tmp_stack,q_cord,std_stack,gpu_flag,vec_model_flag,cost_function_flag,plot_flag,Alg_flag,est_gBlur_flag,noisy_flag,maskInit);
-else
-    [maskRec,gB,Nph,I_mod] = PR_coverslip_data(IS,tmp_stack,q_cord,std_stack,gpu_flag,vec_model_flag,cost_function_flag,plot_flag,Alg_flag,est_gBlur_flag,noisy_flag);
-end
+[maskRec,gB,Nph,I_mod] = PR_coverslip_data(IS,tmp_stack,q_cord,std_stack,gpu_flag,vec_model_flag,cost_function_flag,plot_flag,Alg_flag,est_gBlur_flag,noisy_flag);
 %% outputs
 % maskRec - the PR phase mask
 % gB - estimation of the blur (if was enabled)

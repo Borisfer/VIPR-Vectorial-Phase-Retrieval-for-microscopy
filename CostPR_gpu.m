@@ -60,7 +60,7 @@ for z_ind = 1:size(q,1)
         g_bfp = g_bfp_init*0;
         g_img = g_bfp_init*0;
         
-        if sum(IS.p_vec) == 0 % freely rotating - superposition solution
+        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
             % normalization
             %         normfact = sqrt(Nph).*normfact_gpu;
             for g_id = 1:size(IS.g_bfp,3)
@@ -158,7 +158,7 @@ for z_ind = 1:size(q,1)
   
     %% calc gradient
     if vec_model_flag
-        if sum(IS.p_vec) == 0 % freely rotating - superposition solution
+        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
             for g_id = 1:size(g_img,3)
                 grad_tmp(:,:,g_id) = 2*1/N*real((fft2(ifftshift(dcost_dIimg).*1i.*conj(g_img(:,:,g_id))).*g_bfp(:,:,g_id))).*Nph_max_fact(z_ind); %%
             end

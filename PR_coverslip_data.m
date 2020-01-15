@@ -11,7 +11,6 @@ function [maskRec,gBlur,Nph,I_mod] = PR_coverslip_data(IS,IMG_T,q,std_stack,gpu_
 % Alg_flag :  1 - ADAM, 2 - Adamax , 3- Nadam, 4 - Nesterov, 5- SVRG, 6- Vanilla SGD
 % est_gBlur_flag : flag to estimate the blur in the optimization
 % noisy_flag % 0- for design PSFs, 1 - for PR
-% maskInit : optional mask for initialization with
 
 %% output
 % maskRec - unwraped retrieved phase mask, real pixel size.
@@ -19,15 +18,11 @@ function [maskRec,gBlur,Nph,I_mod] = PR_coverslip_data(IS,IMG_T,q,std_stack,gpu_
 % Nph - estimated signal per slice
 % I_mod - simulated z-stack, if plot_flag 
 
-%% mask initialization
-if  nargin < 12
-    maskInit = IS.circmask*0;
-end
 I_mod=[];
 %% needed derivative parameters
 step_size = IS.step_size;
 k = (2*pi/IS.lambda);
-
+maskInit = IS.circmask*0;
 int_cos = IS.int_cos;
 z_emit = (IS.z_emit);
 opt_phase_mat = (IS.psi);
@@ -42,9 +37,7 @@ else
 end
 %% move data to GPU if enabled
 if gpu_flag == 1
-    
-    maskInit = gpuArray(maskInit);
-    
+        
     q = gpuArray(q);
     IMG_T = gpuArray(IMG_T);
     std_stack = gpuArray(std_stack);
@@ -80,7 +73,7 @@ Cost_fun = @(phase_mask,q,data,std_stack_gpu,Nph_gpu,gBlur_gpu,Nph_opt_flag) Cos
     ,gBlur_gpu ,k, opt_phase_mat ,g_bfp,vec_model_flag,int_cos,circ,circ_sc,Nph_opt_flag);
 
 % define GPU init - cost function
-Cost_fun_init = @(phase_mask,q,data,std_stack_gpu,Nph_gpu,gBlur_gpu) CostPR_gpu_init(IS,q,data,(std_stack_gpu),Nph_gpu...
+Cost_fun_init = @(q,data,std_stack_gpu,Nph_gpu,gBlur_gpu) CostPR_gpu_init(IS,q,data,(std_stack_gpu),Nph_gpu...
      ,k, opt_phase_mat,g_bfp,vec_model_flag,int_cos,circ,circ_sc);
 %
 % run optimization
@@ -137,7 +130,7 @@ if plot_flag==1
         daspect([1 1 1]);
         title(['data NFP=',num2str(q(z,4))]);
         drawnow
-        pause(0.1)
+        pause(0.3)
     end
     close(100)
 end

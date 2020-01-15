@@ -1,5 +1,4 @@
 %% user defined flags
-Prior_mask_flag = 0; % 1 loading a predefined phase mask for initialization
 gpu_flag = 1; % 1 - use GPU, 0 - on CPU
 vec_model_flag = 1; % 1 - vectorial model, 0 - scalar model
 cost_function_flag = 4; % optimization cost 1 - L1, 2 - L2, 3 - Poiss MLE, 4 - Sum of gaussians MLE
@@ -9,15 +8,46 @@ vec_model_pol = 'x' ; %'x' or 'y' for having a  polarizer, 'b' for full vectoria
 noisy_flag = 1; % 0- for design PSFs, 1 - for PR;
 est_gBlur_flag = 1; % 1- estimate gBlur after 1/3 of the iterations
 
-%% load data stack and z positions and define optical parameters
+%% define optical parameters
+IS.Signal=1; % for generator - keep 1
+IS.bg=0; % for generator - keep 0
+
 % input optical parameters
 if data_set==1
-    %optical parameters ( some parameters are a guess as they are not provided by the challange)
-    IS = init_input_EPFL;
-else
-    %optical parameters 
+     %optical parameters
+    %
+    IS.M=100; % objective magnification
+    IS.NA=1.45; % objective NA
+    IS.lambda=[605]*10^-3; % wavelength [um]
+    IS.SLM_psize = 20; % pixel size of SLM [um]
+    IS.Cam_psize = 16; % pixel size of camera [um]
+    IS.gBlur=0.75; %initial guess of the blurring
+    IS.n_glass=1.518; % RI of immersion oil
+    IS.n_med=1.33; % RI of sample medium
+    IS.f_4f = 15e4; % focal length of 4-f  system (if 2D imaging- use tube f)
+    IS.FOV_size = 80; % size of ROI used
+    IS.SAF_flag = 1; % include SAF or not (1=include - recommended)
+    IS.Iris_pNA = 1; % optional iris to limit BFP, in range [0,1] where 1 is the NA
+    % emitter size
+    IS.z_emit = 0.023; % emitter radius [um]
+    
+    % polarization of dipole (0,0,0) is for freely rotating
+    IS.p_vec = [0,0,0]; % incoherent
+    
+    % for coherent - normalize  the vector
+%     IS.p_vec = [1,-1,1];
+    % IS.p_vec = [1,0,0];
+elseif data_set == 2
     IS = init_input;
-end 
+    
+elseif data_set == 3 % 
+    IS = init_input_EPFL;
+end
+
+if sum(IS.p_vec == 0) ~= 3
+    IS.p_vec = IS.p_vec./norm(IS.p_vec);
+end
+
 %% optimization parameters
 % the parameters in this section define the optimization proccess
 
@@ -38,39 +68,6 @@ IS.last_iter = 100; % how many iterations  to run not with SGD (at end of optimi
 IS.last_iter_flag = 1; % 1 - contuine SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with side info on corr
 IS.thr_corr = 0.01; % threshold for correlation calc (used if last_iter_flag = 3)
 IS.upsample_fact = 1; %
-IS.update_Signal = 1; % 1 - update signal at second half of iterations (needs more iterations, but is more accurate), 0 - keep the image sum 
+IS.update_Signal = 1; % 1 - update signal at second half of iterations (needs more iterations, but is more accurate), 0 - keep the image sum
 % plot sizes for PSF
 IS.plotsize = 99 ; % size of psf plots [pixels]
-
-%% initialize xyz positions to emitter radius
-if data_set == 1
-    %load data
-    EPFL_data_load;
-    % how much to sample 
-    dI = 1;
-    % choose a single stack
-    IMG_T = DH_PSF(:,:,1:dI:end,5);
-    % take minus z to match to NFP 
-    z_stack_pos = -z(1:dI:end,1)';
-    % image centering 
-    xy = xy(1:dI:end,:,1);
-    IS.FOV_size = size(IMG_T,1);
-    % do scalar model because we don't know really what the system is 
-    vec_model_flag = 0;
-else
-    % load data and z positions
-    load_data_stack;
-    % xy positions set to zero 
-    xy = zeros(length(z_stack_pos),2);
-end
-z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
-
-%% full coordinate definition
-q_cord = [xy';z_pos';z_stack_pos]'; %x,y,z,NFP
-
-%% add prior mask if needed
-if Prior_mask_flag == 1
-    % create phase mask here which fits the aperture (= aperture)
-%     maskInit = ;
-end
-
