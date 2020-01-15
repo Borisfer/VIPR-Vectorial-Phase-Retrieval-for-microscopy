@@ -5,13 +5,12 @@ vec_model_flag = 1; % 1 - vectorial model, 0 - scalar model
 cost_function_flag = 4; % optimization cost 1 - L1, 2 - L2, 3 - Poiss MLE, 4 - Sum of gaussians MLE
 plot_flag = 1; % plot while SGD runs, slows down ~ X4
 Alg_flag = 1  ; % gradient method : 1 - ADAM, 2 - Adamax , 3- Nadam, 4 - Nesterov ,5- Vanilla SGD
-vec_model_pol = 'y' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
+vec_model_pol = 'x' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
 noisy_flag = 1; % 0- for design PSFs, 1 - for PR;
+est_gBlur_flag = 1; % 1- estimate gBlur after 1/3 of the iterations
 
 %% load data stack and z positions and define optical parameters
 % input optical parameters
-
-
 if data_set==1
     %optical parameters ( some parameters are a guess as they are not provided by the challange)
     IS = init_input_EPFL;
@@ -24,7 +23,7 @@ end
 
 % pre-proc parameters
 IS.I_thr_flag = 2; % 1- thr above IS.thr*max(I) per image, else - thr above IS.thr*background_std
-IS.I_thr = 2; %  threshold parameter
+IS.I_thr = 1; %  threshold parameter
 IS.corner_size = 10; % size of corners to  estimate noise [pixels]
 
 % hyper-params
@@ -33,7 +32,6 @@ IS.step_size = 3e-1; % step  size (try 3e-1 for ADAM and 3e-8 for SGD)
 IS.point_num = 3; % size of mini-batch per SGD iteration
 
 % additional options
-est_gBlur_flag = 1; % 1- estimate gBlur after 1/3 of the iterations
 IS.gBlur_cost = 2; % cost to estimate gBlur if est_gBlur_flag=1, (1-4 same as cost_function_flag , 5 - by corr2)
 % option not to use SGD
 IS.last_iter = 100; % how many iterations  to run not with SGD (at end of optimization)
