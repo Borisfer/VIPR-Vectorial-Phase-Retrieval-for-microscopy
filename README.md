@@ -51,12 +51,14 @@ and later a JAVA GUI will be added.
     g)	vec_model_pol : needed If vec_model_flag=1, choose polarization state ‘x’(default), ‘y’, or ‘b’ for both. 
 
     h)	noisy_flag: 0- for design PSFs, 1 - for real measurements(default).
+    
+    Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
 
 * Part B: define the optical system and measured PSFs. 
 
     Open ''init_input.mat'' and change the optical parameters to match your setup. 
 
-    Notes: for freely rotating dipole, leave polarization vector as zeros. 
+    Note: for freely rotating dipole, leave polarization vector as zeros. 
 
 * Part C: more advanced optimization parameters. 
 
@@ -90,7 +92,7 @@ and later a JAVA GUI will be added.
 
 * Part D: load the data set
 
-   • For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-                   stack(recommended to use an odd grid size ) 
+   • For your code -  change this function to your own code such that the variable IMG will contain the 3d matrix of the z-                   stack(recommended to use an odd grid size) 
 
      and that the variable z_stack_pos will contain the vector of NFP positions for the reconstruction. 
 
