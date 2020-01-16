@@ -83,7 +83,7 @@ else
 end
 % crop image
 if mod(size(Iimg,1),2)==1
-    Iimg = real(Iimg(end/2-floor(N_crop)/2+1:end/2+floor(N_crop)/2,end/2-floor(N_crop)/2+1:end/2+floor(N_crop)/2));
+    Iimg = real(Iimg(floor(end/2-floor(N_crop)/2+1):floor(end/2+floor(N_crop)/2),floor(end/2-floor(N_crop)/2+1):floor(end/2+floor(N_crop)/2)));
 else
     Iimg = real(Iimg(round(size(Iimg,1)/2-round(N_crop-1)/2+1/2):round(size(Iimg,1)/2+floor(N_crop-1)/2+1/2),round(size(Iimg,2)/2-round(N_crop-1)/2+1/2):round(size(Iimg,2)/2+floor(N_crop-1)/2+1/2)));
 end

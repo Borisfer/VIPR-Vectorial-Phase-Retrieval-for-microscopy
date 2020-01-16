@@ -194,5 +194,4 @@ end
 % maskRec - the PR phase mask
 % gB - estimation of the blur (if was enabled)
 % Nph - estimation of image sum
-% I_mod - simulated stack to match with PSF inputs
-
+% I_mod - simulated stack
