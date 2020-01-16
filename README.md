@@ -27,11 +27,11 @@ This demo is a currently working with 2 examples and and option for user input d
 
 # Work flow:
 
-0) Download all the files and extract the rar files from "demo_data" into the folder (leave the extracted as seperate folders)
+0) **Download all the files and extract the rar files from "demo_data" into the folder (leave the extracted as seperate folders)**
 
-1) Open ''Main''
+1) **Open ''Main''**
 
-2) Choose data set ( data_set=1 for your data, data_set = 3 for EPFL Double Helix data and data_set = 2 for demo TetraPod stack).
+2) **Choose data set ( data_set=1 for your data, data_set = 3 for EPFL Double Helix data and data_set = 2 for demo TetraPod stack).**
 
 Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
 
@@ -41,10 +41,10 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
         
 ![](gifs/DH_PSF.gif)
      
-3)  Access the script ''VIPR_user_input'':
+3)  **Access the script ''VIPR_user_input'':**
     This script contains all the required user data which is needed for ''Main.mat'' to run.
 
-* Part A: this part contains the flags which control the MATLAB code outline:
+* **Part A: this part contains the flags which control the MATLAB code outline:**
 
     a)	Prior_mask_flag :(default 0) - 1 if you want to start from a pre-defined mask and not from a clear aperture. 
 
@@ -67,14 +67,14 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
 
-* Part B: define the optical system 
+* **Part B: define the optical system** 
 
     Change the parameters to match your optical system.
 
     Note: for freely rotating dipole, leave polarization vector as zeros. 
           for fixed dipoles, input a normalized vector. 
 
-* Part C: more advanced optimization parameters. 
+* **Part C: more advanced optimization parameters.** 
 
     a)	IS.I_thr_flag : how to  threshold the data - 1 is for thresholding pixels below IS.thr*max(I) per image I, 2 - threshold pixels         below IS.thr*background_std.
 
@@ -102,17 +102,18 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     m)	IS.plotsize : size of psf plots [pixels]
 
-4)** if you want to use your data - open 'VIPR_load_data.m'**
-    a) Choose your measured z-stack
+4) **if you want to use your data - open 'VIPR_load_data.m'**
+
+    a) The file choice is automatic when you run Main.m
     
-    * important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
-    Thus: you need to create a centered z-stack - has to be square and we recommend and odd grid size.
+    * *important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
+    Thus: you need to create a centered z-stack - has to be square and we recommend and odd grid size.*
     
     b) input coordinates associated with the images in any way you want
     input size needs to match the amount of images loaded
     Default: x=0 ; y = 0 ; z = emitter radius; z_stack_pos - Nominal Focal Plane(NFP) positions (Default - loads NFP mat file for                    TetraPod images)
 
-5) run ''Main.m''
+5) **run ''Main.m''**
 
 # Output (of the script ''Main'')
 
