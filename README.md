@@ -36,7 +36,7 @@ This demo is a currently working with 2 examples and and option for user input d
 
 # Work flow:
 
-0) **Download all the files (for demo images, do not move the file locations)**
+0) **Download all the files (for demo images, do not move the file locations) except gifs**
 
 1) **Open ''Main''**
 
