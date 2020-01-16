@@ -27,7 +27,7 @@ This demo is a currently working with 2 examples and and option for user input d
 
 # Work flow:
 
-0) **Download all the files and extract the rar files from "demo_data" into the folder (leave the extracted as seperate folders)**
+0) **Download all the files into the same folder**
 
 1) **Open ''Main''**
 
