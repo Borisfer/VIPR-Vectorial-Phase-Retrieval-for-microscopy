@@ -27,7 +27,7 @@ This demo is a currently working with 2 examples and and option for user input d
 
 # Work flow:
 
-0) **Download all the files into the same folder**
+0) **Download all the files (for demo images, do not move the file locations)**
 
 1) **Open ''Main''**
 
