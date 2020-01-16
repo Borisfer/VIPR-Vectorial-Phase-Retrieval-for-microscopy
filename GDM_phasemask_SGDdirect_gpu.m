@@ -284,7 +284,10 @@ while iter<=maxiter
     %% estimate gblur
     if (est_gBlur_flag>0 && (iter == floor(IS.SGDiter/3)))
         %        generate PSF stack
-        gBlur_gpu = gpuArray( fspecial('gaussian',[5 5],gB_est));
+        gBlur_gpu = ( fspecial('gaussian',[5 5],gB_est));
+        if gpu_flag==1
+            gBlur_gpu = gpuArray(gBlur_gpu);
+        end
         
         %% create the current full data set
         for j = 1:size(data,3)
