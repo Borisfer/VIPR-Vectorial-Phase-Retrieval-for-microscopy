@@ -143,14 +143,6 @@ c)	Nph – vector of estimated image intensities
 
 d)	I_mod – the reconstructed z-stack.
 
-# Use after retrieval
-
-The function PSF_generator can be used estimate the recovery by creating an in-line function at the end of the script:
-
-PSF_Gen = @(phase_mask,x,y,z,NFP) PSF_generator(phase_mask,[x,y,z],IS,NFP,opt_phase_mat...
-    ,g_bfp,circ,circ_sc,int_cos,vec_model_flag);
- 
-note: the generator outputs an image of sum 1 ( before cropping ), no background and unblurred.
 
 # Citation
 
