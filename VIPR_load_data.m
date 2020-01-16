@@ -1,5 +1,5 @@
 
-%% load your data here
+%% load your data here (automatically when Main is ran)
 [FOV_size,IMG_T] = input_stack;
 IS.FOV_size = FOV_size; % size of ROI used
 
@@ -14,6 +14,6 @@ xy = zeros(length(z_stack_pos),2);
 
 %
 if size(xy,1) ~= size(IMG_T,3) || size(z_pos,1) ~= size(IMG_T,3) || size(z_stack_pos,1) ~= size(IMG_T,3)
-    msgbox('Chosen FOV is not square');
+    msgbox('coordinate matrix does not match in size with amount of loaded images');
     return
 end
