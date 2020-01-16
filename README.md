@@ -21,7 +21,7 @@ This demo is a currently working with 2 examples and and option for user input d
 
         Thus: you need to create a centered z-stack (saved as a single tif-stack)
         
-        *has to be square and we recommend an odd grid size.*
+        has to be square and we recommend an odd grid size.
         
         The noise is estimated from the corners of the image, so do not crop too close to the PSF - 
         
