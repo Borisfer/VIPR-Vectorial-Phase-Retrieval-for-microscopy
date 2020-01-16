@@ -18,7 +18,8 @@ This demo is a currently working with 2 examples and and option for user input d
 # General guidelines: 
 
 •       As this code is aimed at being general, we cannot define metrics for centering\cropping in advance.
-        Thus: you need to create a centered z-stack - has to be square and we recommend an odd grid size.
+        Thus: you need to create a centered z-stack (saved as a single z-stack)
+        *has to be square and we recommend an odd grid size.*
         
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
