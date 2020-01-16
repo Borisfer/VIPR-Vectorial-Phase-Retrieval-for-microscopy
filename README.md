@@ -1,4 +1,4 @@
-# VIPR-PixelWise
+# VIPR-PixelWise phase retrieval 
 
 # Overview: 
 
