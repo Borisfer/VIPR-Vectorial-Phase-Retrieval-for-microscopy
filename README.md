@@ -93,7 +93,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     h)	IS.last_iter : how many iterations  to run not with SGD (at end of optimization), at these iterations, the noise and blur are           not randomized. 
 
-    i)	IS.last_iter_flag : 1 - continue SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with             side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information." International Conference on             Machine Learning. 2016)
+    i)	IS.last_iter_flag : 1 - continue SGD (fastest), 2 - global gradient(slowest), 3- batch the lowest correlation points, 4-                 adaptive sampling with side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information."                 International Conference on Machine Learning. 2016)
 
     j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
 
