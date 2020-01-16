@@ -41,7 +41,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
         
 ![](gifs/DH_PSF.gif)
      
-3)	Access the script ''VIPR_user_input'':
+3)  Access the script ''VIPR_user_input'':
     This script contains all the required user data which is needed for ''Main.mat'' to run.
 
 * Part A: this part contains the flags which control the MATLAB code outline:
@@ -102,7 +102,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     m)	IS.plotsize : size of psf plots [pixels]
 
-4) if you want to use your data - open 'VIPR_load_data.mat'
+4)** if you want to use your data - open 'VIPR_load_data.m'**
     a) Choose your measured z-stack
     
     * important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
@@ -112,6 +112,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
     input size needs to match the amount of images loaded
     Default: x=0 ; y = 0 ; z = emitter radius; z_stack_pos - Nominal Focal Plane(NFP) positions (Default - loads NFP mat file for                    TetraPod images)
 
+5) run ''Main.m''
 
 # Output (of the script ''Main'')
 
