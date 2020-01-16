@@ -111,7 +111,9 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
     Thus: you need to create a centered z-stack - has to be square and we recommend an odd grid size.*
     
     b) input coordinates associated with the images in any way you want
-    input size needs to match the number of images loaded
+    
+    input size needs to match the number of images loaded,
+    
     Default: x=0 ; y = 0 ; z = emitter radius; z_stack_pos - Nominal Focal Plane(NFP) positions (Default - loads NFP mat file for                    TetraPod images)
 
 5) **run ''Main.m''**
