@@ -95,18 +95,6 @@ for j = 1:size(IMG_T,3)
     title('diff');
 end
 close(11)
-%% Fresnel matching of the grid
-% create an odd grid  size
-if mod(floor(IS.lambda(1)*IS.f_4f./(IS.Cam_psize.*IS.SLM_psize)),2)==1
-    IS.maskDiam_m = IS.lambda*IS.f_4f./(IS.Cam_psize*IS.SLM_psize)*IS.SLM_psize;
-else
-    IS.maskDiam_m = IS.lambda*IS.f_4f./(IS.Cam_psize*IS.SLM_psize)*IS.SLM_psize+IS.SLM_psize;
-end
-%% add zeros if BFP is too small
-if IS.maskDiam_m./IS.SLM_psize < IS.FOV_size
-    % fix this with box interpolation
-    IS.maskDiam_m = IS.FOV*IS.SLM_psize;
-end
 
 %% upsample if needed (usually if object space pixels are large compared to the wavelength)
 tmp=[];
@@ -132,6 +120,19 @@ if IS.upsample_fact>1
     %increase blur
     IS.gBlur = IS.gBlur*IS.upsample_fact;
     
+end
+
+%% Fresnel matching of the grid
+% create an odd grid  size
+if mod(floor(IS.lambda(1)*IS.f_4f./(IS.Cam_psize.*IS.SLM_psize)),2)==1
+    IS.maskDiam_m = IS.lambda*IS.f_4f./(IS.Cam_psize*IS.SLM_psize)*IS.SLM_psize;
+else
+    IS.maskDiam_m = IS.lambda*IS.f_4f./(IS.Cam_psize*IS.SLM_psize)*IS.SLM_psize+IS.SLM_psize;
+end
+%% add zeros if BFP is too small
+if IS.maskDiam_m./IS.SLM_psize < IS.FOV_size
+    % fix this with box interpolation
+    IS.maskDiam_m = IS.FOV*IS.SLM_psize;
 end
 
 %% pre compute all the optical parameters
