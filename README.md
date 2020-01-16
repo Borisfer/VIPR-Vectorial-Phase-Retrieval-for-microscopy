@@ -29,6 +29,8 @@ This demo is a currently working with 2 examples and and option for user input d
         
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
+•       Designed on MATLAB 2019a with image processing and optimization toolbox. 
+
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
 
 
