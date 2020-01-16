@@ -1,4 +1,4 @@
-# PR-PixelWise
+# VIPR-PixelWise
 
 # Overview: 
 
