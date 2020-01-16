@@ -92,11 +92,11 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
 
     h)	IS.last_iter : how many iterations  to run not with SGD (at end of optimization), at these iterations, the noise and blur are           not randomized. 
 
-    i)	IS.last_iter_flag : 1 - contuine SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with             side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information." International Conference on             Machine Learning. 2016)
+    i)	IS.last_iter_flag : 1 - continue SGD, 2 - global gradient, 3- batch the lowest correlation points, 4- adaptive sampling with             side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information." International Conference on             Machine Learning. 2016)
 
     j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
 
-    k)	IS.upsample_fact : (default 1) if you wish to upsample the data, usufull if object space pixels are large compared to the               wavelength
+    k)	IS.upsample_fact : (default 1) if you wish to upsample the data, useful if object space pixels are large compared to the               wavelength
 
     l)	IS.update_Signal : 1 - update signal at second half of iterations (needs more iterations, but is more accurate - might overfit           the data), 0 - keep the image sum as initial guess
 
@@ -107,10 +107,10 @@ for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads i
     a) The file choice is automatic when you run Main.m
     
     * *important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
-    Thus: you need to create a centered z-stack - has to be square and we recommend and odd grid size.*
+    Thus: you need to create a centered z-stack - has to be square and we recommend an odd grid size.*
     
     b) input coordinates associated with the images in any way you want
-    input size needs to match the amount of images loaded
+    input size needs to match the number of images loaded
     Default: x=0 ; y = 0 ; z = emitter radius; z_stack_pos - Nominal Focal Plane(NFP) positions (Default - loads NFP mat file for                    TetraPod images)
 
 5) **run ''Main.m''**
