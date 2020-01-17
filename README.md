@@ -1,4 +1,4 @@
-# VIPR-PixelWise phase retrieval 
+# VIPR - Vectorial Phase Retrieval for microscopy
 
 # Overview: 
 
