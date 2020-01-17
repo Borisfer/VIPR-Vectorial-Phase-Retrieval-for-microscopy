@@ -33,6 +33,9 @@ This demo is a currently working with 2 examples and and option for user input d
 
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
 
+•       We didn't define a stopping criteria yet for the algorithm because we found it to be varying drastically with the PSF,
+        the convergence will be defined by the choice of number of iterations and step size.  
+
 
 # Work flow:
 
