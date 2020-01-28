@@ -110,7 +110,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
 
     k)	IS.upsample_fact : (default 1) if you wish to upsample the data, useful if object space pixels are large compared to the               wavelength
 
-    l)	IS.update_Signal : 1 - update signal at second half of iterations (needs more iterations, but is more accurate - might overfit           the data), 0 - keep the image sum as initial guess
+    l)	IS.update_Signal : 1 - update signal at second half of iterations (might overfit the data, so be careful), 0 - keep the image sum as initial guess
 
     m)	IS.plotsize : size of psf plots [pixels]
 
