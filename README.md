@@ -49,7 +49,7 @@ Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and r
 
 ![](gifs/TP_PSF.gif)
 
-for data_set = 3 :the code opens the folder ‘’EPFL DH data’’ and reads images using the activations csv.
+for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ and reads images using the activations csv.
         
 ![](gifs/DH_PSF.gif)
      
