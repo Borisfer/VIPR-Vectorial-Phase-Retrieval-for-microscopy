@@ -43,7 +43,7 @@ This demo is a currently working with 2 examples and and option for user input d
 
 1) **Open ''Main''**
 
-2) **Choose data set ( data_set=1 for your data, data_set = 3 for EPFL Double Helix data and data_set = 2 for demo TetraPod stack).**
+2) **Choose data set ( data_set=1 for your data, data_set = 3 for the EPFL challenge Double Helix data and data_set = 2 for demo              TetraPod stack).**
 
 Default: for data_set = 2 :the code opens the folder ‘’TP images’’ and reads the Tiff images starting with the letter ‘’T’’.
 
