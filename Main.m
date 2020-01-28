@@ -24,8 +24,10 @@ elseif data_set == 2
     z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
     % xy are 0
     xy = zeros(length(z_stack_pos),2);
+    %
+    IS.update_Signal = 1; % 
 elseif data_set == 3
-    %load data
+    %load data from EPFL challange
     EPFL_data_load;
     % how much to sample
     dI = 1;
@@ -39,8 +41,10 @@ elseif data_set == 3
     IS.FOV_size = size(IMG_T,1);
     % do scalar model because we don't know really what the system is
     vec_model_flag = 0;
+    IS.update_Signal = 0; %
 end
-
+% don't let plotsize be larger than data
+IS.plotsize = min(IS.plotsize,IS.FOV_size);
 % define positions per image - [x,y,z,NFP]
 q_cord = [xy';z_pos';z_stack_pos']';
 
