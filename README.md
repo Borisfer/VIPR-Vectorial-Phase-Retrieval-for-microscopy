@@ -109,10 +109,12 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
     j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
 
     k)	IS.upsample_fact : (default 1) if you wish to upsample the data, useful if object space pixels are large compared to the               wavelength
-
+        
     l)	IS.update_Signal : 1 - update signal at second half of iterations (might overfit the data, so be careful), 0 - keep the image sum as initial guess
+    
+    m)  IS.Photobleach_cost_mult : 1 - scale the gradient according to the photobleaching of the source (default 0)
 
-    m)	IS.plotsize : size of psf plots [pixels]
+    n)  IS.plotsize : size of psf plots [pixels]
 
 4) **if you want to use your data - open 'VIPR_load_data.m'**
 
