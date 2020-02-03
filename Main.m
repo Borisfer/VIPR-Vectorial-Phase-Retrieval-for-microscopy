@@ -31,12 +31,13 @@ elseif data_set == 3
     EPFL_data_load;
     % how much to sample
     dI = 1;
+    select_img = 5;
     % choose a single stack
-    IMG_T = DH_PSF(:,:,1:dI:end,5);
+    IMG_T = DH_PSF(:,:,1:dI:end,select_img);
     % take minus z to match to NFP
-    z_stack_pos = -z(1:dI:end,1);
+    z_stack_pos = -z(1:dI:end,select_img);
     % image centering
-    xy = xy(1:dI:end,:,1);
+    xy = xy(1:dI:end,:,select_img);
     z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
     IS.FOV_size = size(IMG_T,1);
     % do scalar model because we don't know really what the system is
