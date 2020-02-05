@@ -106,7 +106,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
 
     i)	IS.last_iter_flag : 1 - continue SGD (fastest), 2 - global gradient(slowest), 3- batch the lowest correlation points, 4-                 adaptive sampling with side info on corr (Gopal, Siddharth. "Adaptive sampling for SGD by exploiting side information."                 International Conference on Machine Learning. 2016)
 
-    j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4)
+    j)	IS.thr_corr : threshold for correlation calc (used if last_iter_flag = 3 or 4), threshold = IS.thr_corr times max(I)
 
     k)	IS.upsample_fact : (default 1) if you wish to upsample the data, useful if object space pixels are large compared to the               wavelength
         
