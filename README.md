@@ -75,7 +75,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
 
     h)	noisy_flag: 0- for design PSFs, 1 - for real measurements(default).
     
-    i)	est_gBlur_flag : 1(default)- estimate gBlur after 1/3 of the iterations, 0 - leave initial guess
+    i)	est_gBlur_flag : 1(default)- estimate the blur kernel after 1/3 of the iterations, 0 - leave initial guess
 
     Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
 
