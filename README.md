@@ -88,7 +88,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
 
 * **Part C: more advanced optimization parameters.** 
 
-    a)	IS.I_thr_flag : how to  threshold the data - 1 is for thresholding pixels below IS.thr*max(I) per image I, 2 - threshold pixels         below IS.thr*background_std.
+    a)	IS.I_thr_flag : how to  threshold the data - 1 is for thresholding pixels below IS.thr times max(I) per image I, 2 - threshold pixels below IS.thr times the background std.
 
     b)	IS.I_thr: threshold parameter
 
