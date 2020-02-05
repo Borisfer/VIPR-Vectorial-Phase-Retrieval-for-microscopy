@@ -65,7 +65,7 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
     c)	vec_model_flag : 1(default) for vectorial model, 0 for scalar ( faster, use for air-objectives).
 
     d)	cost_function_flag : define cost function to optimize, 1-L1, 2-L2, 3- Poisson MLE, 4- Gaussian MLE (default-see paper) 
-        if you want to add a new cost, consult with the author, it is quite easy to do.
+        if you want to add a new cost, consult with the author, it is easy to do.
 
     e)	plot_flag: 1 to visualize results during optimization(default), slows down the code.
     
