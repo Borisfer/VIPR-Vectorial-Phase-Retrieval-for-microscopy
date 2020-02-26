@@ -1,5 +1,5 @@
 %% user defined flags
-gpu_flag = 1; % 1 - use GPU, 0 - on CPU
+gpu_flag = 0; % 1 - use GPU, 0 - on CPU
 vec_model_flag = 1; % 1 - vectorial model, 0 - scalar model
 cost_function_flag = 4; % optimization cost 1 - L1, 2 - L2, 3 - Poiss MLE, 4 - Sum of gaussians MLE
 plot_flag = 1; % plot while SGD runs, slows down ~ X4
@@ -7,6 +7,7 @@ Alg_flag = 1  ; % gradient method : 1 - ADAM, 2 - Adamax , 3- Nadam, 4 - Nestero
 vec_model_pol = 'y' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
 noisy_flag = 1; % 0- for design PSFs, 1 - for PR;
 est_gBlur_flag = 1; % 1- estimate gBlur after 1/3 of the iterations
+crop_flag = 3; % 1 = point choice, 2= CoG of max projection , 3- no cropping
 
 %% define optical parameters
 IS.Signal=1; % for generator - keep 1
@@ -25,7 +26,7 @@ if data_set==1
     IS.n_glass=1.518; % RI of immersion oil
     IS.n_med=1.33; % RI of sample medium
     IS.f_4f = 15e4; % focal length of 4-f  system (if 2D imaging- use tube f)
-    IS.FOV_size = 80; % size of ROI used
+    IS.FOV_size = 70; % size of ROI used
     IS.SAF_flag = 1; % include SAF or not (1=include - recommended)
     IS.Iris_pNA = 1; % optional iris to limit BFP, in range [0,1] where 1 is the NA
     % emitter size

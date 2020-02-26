@@ -1,6 +1,6 @@
 
 %% load your data here (automatically when Main is ran)
-[FOV_size,IMG_T] = input_stack;
+[FOV_size,IMG_T] = input_stack(crop_flag,IS.FOV_size);
 IS.FOV_size = FOV_size; % size of ROI used
 
 %% load image coordinates here (change to match your data)

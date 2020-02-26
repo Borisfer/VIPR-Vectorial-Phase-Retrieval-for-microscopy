@@ -10,7 +10,7 @@
 %
 clear all;close all;clc
 %% data set
-data_set = 2; %1 - your data, 3-EPFL DH 1.5[um], 2 - 4[um] Tetrapod mask 
+data_set = 1; %1 - your data, 3-EPFL DH 1.5[um], 2 - 4[um] Tetrapod mask 
 %% all user input defined here
 VIPR_user_input;
 
@@ -31,13 +31,14 @@ elseif data_set == 3
     EPFL_data_load;
     % how much to sample
     dI = 1;
-    select_img = 5;
+    %
+    sample_DH = 1;
     % choose a single stack
-    IMG_T = DH_PSF(:,:,1:dI:end,select_img);
+    IMG_T = DH_PSF(:,:,1:dI:end,sample_DH);
     % take minus z to match to NFP
-    z_stack_pos = -z(1:dI:end,select_img);
+    z_stack_pos = -z(1:dI:end,sample_DH);
     % image centering
-    xy = xy(1:dI:end,:,select_img);
+    xy = xy(1:dI:end,:,sample_DH);
     z_pos = zeros(length(z_stack_pos),1)+IS.z_emit;
     IS.FOV_size = size(IMG_T,1);
     % do scalar model because we don't know really what the system is
