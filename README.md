@@ -27,7 +27,7 @@ This demo is a currently working with 2 examples and and option for user input d
         
         can result in overestimation of the noise.
         
-        Update (26/02/2020) : we have added simple cropping options - see crop_flag parameter in A) part3 
+        Update (26/02/2020) : we have added simple cropping options - see crop_flag parameter in Work Flow 3) part A 
         
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
