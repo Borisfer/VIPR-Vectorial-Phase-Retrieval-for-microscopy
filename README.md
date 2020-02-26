@@ -27,6 +27,8 @@ This demo is a currently working with 2 examples and and option for user input d
         
         can result in overestimation of the noise.
         
+        Update (26/02/2020) : we have added simple cropping options - see crop_flag parameter in A) part3 
+        
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
 •       Designed on MATLAB 2019a with image processing and optimization toolbox. 
@@ -78,6 +80,9 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
     i)	est_gBlur_flag : 1(default)- estimate the blur kernel after 1/3 of the iterations, 0 - leave initial guess
 
     Note: for designing PSFs, it's better to switch to L1 norm ( cost_function_flag = 1 )
+    
+    j) crop_flag % cropping flag for user data, 1 = point choice, 2= CoG of max projection , 3- no cropping (default)
+    note: make sure that the FOV_size parameter is small enough for the choice of center.
 
 * **Part B: define the optical system** 
 
@@ -119,9 +124,6 @@ for data_set = 3 :the code opens the folder ‘’EPFL challenge DH data’’ a
 4) **if you want to use your data - open 'VIPR_load_data.m'**
 
     a) The file choice is automatic when you run Main.m
-    
-    * *important note: As this code is general for many cases, we cannot define metrics for centering\cropping in advance.
-    Thus: you need to create a centered z-stack - has to be square and we recommend an odd grid size.*
     
     b) input coordinates associated with the images in any way you want
     
