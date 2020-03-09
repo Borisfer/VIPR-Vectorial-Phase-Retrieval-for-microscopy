@@ -16,28 +16,12 @@ This demo is a currently working with 2 examples and and option for user input d
 •	Finobj.mat written by Yair M. Altman , used to handles the plots. 
 
 # General guidelines: 
-
-•       As this code is aimed at being general, we cannot define metrics for centering\cropping in advance.
-
-        Thus: you need to create a centered z-stack (saved as a single tif-stack)
-        
-        has to be square and we recommend an odd grid size.
-        
-        The noise is estimated from the corners of the image, so do not crop too close to the PSF - 
-        
-        can result in overestimation of the noise.
-        
-        Update (26/02/2020) : we have added simple cropping options - see crop_flag parameter in Work Flow 3) part A 
         
 •	Evaluation and testing was done on a laptop with I7 8750H CPU and NVIDIA GeForce 2070RTX.
 
 •       Designed on MATLAB 2019a with image processing and optimization toolbox. 
 
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
-
-•       We didn't define a stopping criteria yet for the algorithm because we found it to be varying drastically with the PSF,
-        the convergence will be defined by the choice of number of iterations and step size.  
-
 
 # Work flow:
 
