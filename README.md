@@ -6,6 +6,7 @@ This code is associated with the paper : “VIPR: Vectorial Implementation of Ph
 
 The code generates a phase mask from a set of images with pre-defined coordinates ( for a z-stack or any general design), optimized mainly for high NA objectives. 
 
+Open ''Example on TP mask'' for more details on how to use the code. 
 
 # Note on future updates 
 
