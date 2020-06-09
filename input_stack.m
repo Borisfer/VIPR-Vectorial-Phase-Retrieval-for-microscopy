@@ -1,7 +1,7 @@
 function [FOV_size,IMG_T] = input_stack(crop_flag,FOV_size)
 
 % choose tiff_stack
-[filename, PATHNAME] = uigetfile([pwd,'../*.tif'],'title','Choose tiff stack');
+[filename, PATHNAME] = uigetfile([pwd,'../*.tif'],'Choose tiff stack');
 if filename == 0
     msgbox('Bad path name' );
     return
@@ -15,13 +15,15 @@ for j = 1:size(metadata,1)
 end
 close(f)
 
-if size(IMG_T,1) ~= size(IMG_T,2)
-    msgbox('Chosen FOV is not square');
-    return
-end
+
 %% crop the data
+if crop_flag == 0
+    if size(IMG_T,1) ~= size(IMG_T,2)
+      msgbox('Chosen FOV is not square');
+      return
+    end
 %% manual selection
-if crop_flag == 1
+elseif crop_flag == 1
     %% select ROI
     h = figure;
     imagesc(IMG_T(:,:,round(end/2)));daspect([1,1,1]);
