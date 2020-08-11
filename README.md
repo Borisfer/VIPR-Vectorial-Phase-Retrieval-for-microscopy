@@ -22,8 +22,9 @@ This demo is a currently working with 2 examples and and option for user input d
 
 •       Designed on MATLAB 2019a with image processing and optimization toolbox. 
 
-•	Coordinate system is defined like MATLAB images (x is right and y is down). 
+•	Image coordinate system is defined like MATLAB images (x is right and y is down). 
 
+![3D](coords.jpg)
 
 # Work flow:
 
