@@ -24,6 +24,8 @@ This demo is a currently working with 2 examples and and option for user input d
 
 •	Coordinate system is defined like MATLAB images (x is right and y is down). 
 
+![coords](coords.jpeg)
+
 # Work flow:
 
 0) **Download all the files (for demo images, do not move the file locations) except gifs**
