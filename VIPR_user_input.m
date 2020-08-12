@@ -71,7 +71,7 @@ IS.last_iter_flag = 3; % 1 - contuine SGD, 2 - global gradient, 3- batch the low
 IS.thr_corr = 0.01; % threshold for correlation calc (used if last_iter_flag = 3)
 IS.upsample_fact = 1; % how much to upsample the data (usually leave at 1)
 IS.update_Signal = 1; % 1 - update signal at second half of iterations 
-IS.count_Nph_epochs=3; % how  many times to update signal(if IS.update_signal ==1)
+IS.count_Nph_epochs=3; % how  many times to update signal(if IS.update_signal ==1) - too many might over-fit
 IS.Photobleach_cost_mult = 0; % add to cost the SNR consideration
 % plot sizes for PSF
 IS.plotsize = 99 ; % size of psf plots [pixels]
