@@ -333,7 +333,7 @@ while iter<=maxiter
         if Nph_opt_flag==1
             count_Nph = count_Nph+1;
         end
-        if count_Nph == 3
+        if count_Nph == 2
             Nph_opt_flag = 0;
         end
     end
