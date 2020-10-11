@@ -138,7 +138,7 @@ end
 %% add zeros if BFP is too small
 if IS.maskDiam_m./IS.SLM_psize < IS.FOV_size
     % fix this with box interpolation
-    IS.maskDiam_m = IS.FOV*IS.SLM_psize;
+    IS.maskDiam_m = IS.FOV_size*IS.SLM_psize;
 end
 
 %
