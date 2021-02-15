@@ -10,7 +10,7 @@ Open ''Example on TP mask'' for more details on how to use the code.
 
 # Note on future updates 
 
-This demo is a currently working with 2 examples and and option for user input data; in the near future a GUI will be added for easier use.
+A python version will be added soon. 
 
 # Other software use:
 
