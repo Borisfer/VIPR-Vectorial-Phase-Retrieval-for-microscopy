@@ -62,18 +62,14 @@ for z_ind = 1:size(q,1)
         g_bfp = g_bfp_init*0;
         g_img = g_bfp_init*0;
         
-        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
-            % normalization
-            %         normfact = sqrt(Nph).*normfact_gpu;
+        if sum(abs(IS.p_vec) == 0) == 3 % freely rotating - superposition solution
+            % BFP corrected intensity
             for g_id = 1:size(IS.g_bfp,3)
                 g_bfp(:,:,g_id) = g_bfp_init(:,:,g_id) .*circ .*BFP_Phase;
-%                 P_fact(g_id) = sum(sum(abs(g_bfp(:,:,g_id)).^2));
             end
-%             normfact = sqrt(Nph)./sqrt(sum(P_fact));
-            normfact=1;
             
             for g_id = 1:size(IS.g_bfp,3)
-                g_img(:,:,g_id) = 1/N.*(fft2(g_bfp(:,:,g_id)*normfact));
+                g_img(:,:,g_id) = 1/N.*(fft2(g_bfp(:,:,g_id)));
                 Iimg = Iimg+g_img(:,:,g_id).*conj(g_img(:,:,g_id));
             end
         else % coherent dipole 
@@ -81,16 +77,12 @@ for z_ind = 1:size(q,1)
             for div_pol = 1:floor(size(IS.g_bfp,3)/3)
                 for g_id = (1:3)+3*(div_pol-1)
                     g_bfp(:,:,g_id) = g_bfp_init(:,:,g_id) .*BFP_Phase.*circ;
-%                     P_mat(:,:,g_id) = g_bfp(:,:,g_id).*IS.p_vec(g_id-3*(div_pol-1));
                 end
-%                 P_fact(div_pol) = sum(sum(abs(sum(P_mat,3)).^2));
             end
-%             normfact = sqrt(Nph)./sqrt(sum(P_fact));
-            normfact =1;
             for div_pol = 1:floor(size(IS.g_bfp,3)/3)
                 for g_id = (1:3)+3*(div_pol-1)
                    
-                    g_img(:,:,g_id) = 1/N.*(fft2((g_bfp(:,:,g_id).*normfact)).*IS.p_vec(g_id-3*(div_pol-1)));
+                    g_img(:,:,g_id) = 1/N.*(fft2((g_bfp(:,:,g_id))).*IS.p_vec(g_id-3*(div_pol-1)));
                 end
                 Iimg = Iimg+abs(sum(g_img,3)).^2;
             end
@@ -98,13 +90,8 @@ for z_ind = 1:size(q,1)
         
     else % scalar model 
         
-        %
+        % scalar bfp
         Ebfp = BFP_Phase.*circ_sc.*int_cos;
-        
-        % normalization
-%         normfact = sqrt(Nph/ (sum(abs(Ebfp(:)).^2)));
-        normfact=1;
-        Ebfp = Ebfp * normfact;
         
         % generate image from pupil function
         Eimg = 1/N*fft2(Ebfp); % image plane
@@ -143,8 +130,6 @@ for z_ind = 1:size(q,1)
             Nph_max_fact(z_ind) = 1.2;
         end
         
-        % moving average
-%         Nph_max_fact(z_ind) = (Nph_max_fact(z_ind)+1)/2;
         %
         tmp = tmp.*Nph_max_fact(z_ind);
     end
@@ -180,7 +165,7 @@ for z_ind = 1:size(q,1)
   
     %% calc gradient
     if vec_model_flag
-        if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
+        if sum(abs(IS.p_vec) == 0) == 3 % freely rotating - superposition solution
             for g_id = 1:size(g_img,3)
                 grad_tmp(:,:,g_id) = 2*1/N*real((fft2(ifftshift(dcost_dIimg).*1i.*conj(g_img(:,:,g_id))).*g_bfp(:,:,g_id))).*Nph_max_fact(z_ind).*normfact; %%
             end
@@ -200,8 +185,7 @@ for z_ind = 1:size(q,1)
 end
 
 out = mean(cost);
-% create a weigting to the SAF light
-
+% remove SAF artifacts if the model is scalar
 if IS.SAF_flag 
     grad = sum(grad,3);
 else

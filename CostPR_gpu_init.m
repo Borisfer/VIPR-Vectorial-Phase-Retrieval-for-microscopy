@@ -55,13 +55,10 @@ for z_ind = 1:size(q,1)
         
         if sum(IS.p_vec == 0) == 3 % freely rotating - superposition solution
             
-            % normalization
-            %         normfact = sqrt(Nph).*normfact_gpu;
+            % BFP corrected intensity
             for g_id = 1:size(IS.g_bfp,3)
                 g_bfp(:,:,g_id) = g_bfp_init(:,:,g_id) .*circ .*BFP_Phase;
-%                 P_fact(g_id) = sum(sum(abs(g_bfp_init(:,:,g_id)).^2));
             end
-%             normfact = sqrt(Nph)./sqrt(sum(P_fact));
             normfact = 1;
             
             %calc back focal plane Green's tensor  
@@ -90,15 +87,9 @@ for z_ind = 1:size(q,1)
         
     else
         
-        %
+        % scalar bfp
         Ebfp = BFP_Phase.*circ_sc.*int_cos;
-        
-        % normalization
-        % normalization
-%         normfact = sqrt(Nph/ (sum(abs(Ebfp(:)).^2)));
-        normfact=1;
-        Ebfp = Ebfp * normfact;
-        
+
         % generate E field in image plane from pupil function
         Eimg = 1/N*fft2(Ebfp); % image plane
         Iimg = Eimg.*conj(Eimg); % intensity at image plane
