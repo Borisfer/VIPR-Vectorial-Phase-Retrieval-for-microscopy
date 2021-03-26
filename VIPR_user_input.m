@@ -6,7 +6,7 @@ plot_flag = 1; % plot while SGD runs, slows down ~ X4
 Alg_flag = 1  ; % gradient method : 1 - ADAM, 2 - Adamax , 3- Nadam, 4 - Nesterov ,5- Vanilla SGD
 vec_model_pol = 'y' ; %'x' or 'y' for having a  polarizer, 'b' for full vectorial
 noisy_flag = 1; % 0- for design PSFs, 1 - for PR;
-est_gBlur_flag = 1; % 1- estimate gBlur after 1/3 of the iterations
+est_gBlur_flag = 0; % 1- estimate gBlur after 1/3 of the iterations
 crop_flag = 1; % 1 = point choice, 2= CoG of max projection , 3- no cropping
 
 %% define optical parameters
@@ -70,7 +70,7 @@ IS.last_iter_flag = 3; % 1 - contuine SGD, 2 - global gradient, 3- batch the low
 %                        4- adaptive sampling with side info on corr
 IS.thr_corr = 0.01; % threshold for correlation calc (used if last_iter_flag = 3)
 IS.upsample_fact = 1; % how much to upsample the data (usually leave at 1)
-IS.update_Signal = 1; % 1 - update signal at second half of iterations 
+IS.update_Signal = 0; % 1 - update signal at second half of iterations 
 IS.count_Nph_epochs=3; % how  many times to update signal(if IS.update_signal ==1) - too many might over-fit
 IS.Photobleach_cost_mult = 0; % add to cost the SNR consideration
 % plot sizes for PSF
