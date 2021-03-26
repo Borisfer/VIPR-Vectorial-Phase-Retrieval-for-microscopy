@@ -25,7 +25,6 @@ elseif data_set == 2
     % xy are 0
     xy = zeros(length(z_stack_pos),2);
     %
-    IS.update_Signal = 1; % 
 elseif data_set == 3
     %load data from EPFL challange
     EPFL_data_load;
