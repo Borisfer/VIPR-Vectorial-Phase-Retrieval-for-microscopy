@@ -157,9 +157,9 @@ while iter<=maxiter
         CDF_sampling = [0,cumsum(p_accu_grad)];
         % generate uniform random points
         R_uni = rand(point_num,1);
-        CDF_interps = interp1(CDF,[0:1/(length(CDF)-1):1],R_uni'); %spans zero to one
+        CDF_interps = interp1(CDF_sampling,[0:1/(length(CDF_sampling)-1):1],R_uni'); %spans zero to one
         %new uniform dest;
-        Q_opt = ceil(out_val*(length(CDF)-1));
+        Q_opt = ceil(CDF_interps*(length(CDF_sampling)-1));
         %sample uniformly from the selected Qs
         for j=1:point_num
             Q = Q_opt(j);
