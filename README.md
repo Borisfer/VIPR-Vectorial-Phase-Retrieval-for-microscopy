@@ -151,11 +151,14 @@ d)	I_mod – the reconstructed z-stack.
 If you use this code for your research, please cite our paper:
 ```
 @article{ferdman2020vipr,
-  title={VIPR: Vectorial Implementation of Phase Retrieval for fast and accurate microscopic pixel-wise pupil estimation},
+  title={VIPR: vectorial implementation of phase retrieval for fast and accurate microscopic pixel-wise pupil estimation},
   author={Ferdman, Boris and Nehme, Elias and Weiss, Lucien E and Orange, Reut and Alalouf, Onit and Shechtman, Yoav},
-  journal={bioRxiv},
+  journal={Optics express},
+  volume={28},
+  number={7},
+  pages={10179--10198},
   year={2020},
-  publisher={Cold Spring Harbor Laboratory}
+  publisher={Optical Society of America}
 }
 ```
 
