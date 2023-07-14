@@ -8,9 +8,6 @@ The code generates a phase mask from a set of images with pre-defined coordinate
 
 Open ''Example on TP mask'' for more details on how to use the code. 
 
-# Note on future updates 
-
-A python version will be added soon. 
 
 # Other software use:
 
